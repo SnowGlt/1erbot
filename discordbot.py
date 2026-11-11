@@ -21,7 +21,11 @@ async def on_message(message):
         return
 
     if message.content.startswith('!tirage'):
-        gagnant = random.choice(message.guild.members)
-        await message.channel.send(gagnant)
+        humains = []
+        for member in message.guild.members:
+            if not member.bot:
+                humains.append(member)
+        gagnant = random.choice(humains)
+        await message.channel.send(gagnant.mention)
 
 client.run(token)
