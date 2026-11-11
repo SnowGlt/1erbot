@@ -21,6 +21,9 @@ async def on_message(message):
         return
 
     if message.content.startswith('!tirage'):
+        if message.guild is None:
+            await message.channel.send("La commande doit être tapée dans un serveur")
+            return
         humains = []
         for member in message.guild.members:
             if not member.bot:
