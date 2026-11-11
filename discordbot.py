@@ -6,6 +6,7 @@ load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
 
 client = discord.Client(intents=intents)
 
@@ -19,6 +20,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('!tirage'):
-        await message.channel.send('Prêt pour le tirage')
+        for members in message.guild.members:
+            await message.channel.send(members.name)
 
 client.run(token)
