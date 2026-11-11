@@ -1,6 +1,7 @@
 import discord
 import os
 from dotenv import load_dotenv
+import random
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -20,7 +21,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('!tirage'):
-        for members in message.guild.members:
-            await message.channel.send(members.name)
+        gagnant = random.choice(message.guild.members)
+        await message.channel.send(gagnant)
 
 client.run(token)
